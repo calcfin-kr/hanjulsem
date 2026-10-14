@@ -1,0 +1,18 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>퇴직금 계산기 - 한줄셈</title><meta name="description" content="평균임금 기준 법정 퇴직금을 계산합니다."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@700&family=Noto+Sans+KR:wght@400;600;700&display=swap"><link rel="stylesheet" href="style.css"><link rel="canonical" href="https://hanjulsem.kr/severance.html"></head><body><div class="w"><header><a class="brand" href="index.html">한줄셈</a><span>한 줄로 끝나는 세금·금융 계산</span></header><nav><a href="salary.html">연봉 실수령액</a><a href="loan.html">대출 이자</a><a href="deposit.html">예금·적금 이자</a><a href="severance.html">퇴직금</a><a href="rent.html">전월세 전환</a><a href="acquisition.html">취득세</a><a href="dsr.html">DSR</a><a href="capgain.html">양도소득세</a><a href="incometax.html">종합소득세</a><a href="guide.html">가이드</a></nav><h1>퇴직금 계산기</h1><p class="sub">계산 결과와 함께 계산 원리, 예시, 법적 근거를 확인하세요.</p>
+<div class="card"><h2 style="margin-top:0">퇴직금 계산기</h2>
+<div class="g">
+<div><label>입사일</label><input id="t_s" type="date" value="2021-01-01"></div>
+<div><label>퇴사일</label><input id="t_e" type="date" value="2026-12-31"></div>
+<div><label>최근 3개월 급여 합계 (세전, 원)</label><input id="t_p" type="number" value="9000000"></div>
+<div><label>최근 1년 상여금 (원)</label><input id="t_b" type="number" value="0"></div>
+<div><label>연차수당 (최근 1년분, 원)</label><input id="t_v" type="number" value="0"></div>
+<div><label>최근 3개월 일수</label><input id="t_d" type="number" value="92"></div>
+</div>
+<button class="go" onclick="sev()">계산하기</button>
+<div class="res" id="t_r">결과가 여기에 표시됩니다.</div></div>
+<div class="card"><h2 style="margin-top:0">계산 원리</h2>
+<p>퇴직금 = 1일 평균임금 × 30일 × (재직일수 ÷ 365)입니다. 평균임금은 퇴직 전 3개월 급여 총액에 상여금의 3/12, 연차수당의 3/12을 더해 3개월 일수로 나눕니다. 계속 근로기간이 1년 이상이고 주 15시간 이상 근무해야 지급 대상입니다.</p>
+<details><summary>퇴직소득세는 포함되나요?</summary><p>포함되지 않은 세전 금액이며, 퇴직소득세는 근속연수 공제 등을 적용해 별도로 계산됩니다.</p></details>
+</div><div class="card"><h2>계산 예시</h2><p>최근 3개월(92일) 급여 합계가 900만원이고 상여금과 연차수당이 없으며 5년(1,825일) 근무했다면 1일 평균임금은 약 97,826원입니다. 퇴직금은 97,826원 × 30일 × (1,825 ÷ 365)로 약 1,467만원(세전)입니다. 연 상여금이 있다면 3/12을 평균임금에 더하므로 퇴직금이 늘어납니다.</p>
+<h2>법적 근거</h2><p>퇴직금은 근로자퇴직급여 보장법 제8조에 따라 계속근로기간 1년에 30일분 이상의 평균임금을 지급하는 것이 원칙이며, 평균임금의 정의는 근로기준법 제2조에 있습니다. 4주 평균 주 15시간 미만 근로자와 계속근로기간 1년 미만인 근로자는 지급 대상이 아닙니다.</p>
+<h2>유의사항</h2><p>평균임금이 통상임금보다 낮으면 통상임금을 기준으로 합니다. DC형·IRP 가입자는 회사가 매년 적립한 부담금과 운용 결과가 퇴직급여가 되므로 이 계산 결과와 다를 수 있습니다. 퇴직소득세는 별도로 계산됩니다.</p><p class="note">기준일: 2026년 10월 14일. 요율·한도·세율은 개정될 수 있으니 국가법령정보센터(law.go.kr) 등 공식 자료로 확인하세요. 계산 결과는 참고용이며 법적 효력이 없습니다.</p><h2>지급 시기와 주의할 점</h2><p>사용자는 근로자가 퇴직한 날부터 14일 이내에 퇴직금을 지급해야 하며, 당사자 합의로 기한을 연장할 수 있습니다. 재직 중 중간정산은 주택 구입 등 법에서 정한 사유가 있을 때만 가능합니다. 상여금과 연차수당을 평균임금에 넣는 방식은 근로계약과 취업규칙에 따라 달라질 수 있으니 회사 인사 담당자나 고용노동부 상담으로 확인하세요.</p><p>DB형 퇴직연금은 퇴직 시점 평균임금 기준으로 지급되어 이 계산기와 비슷하지만, DC형은 적립금 운용 성과에 따라 금액이 달라집니다.</p><h2>자주 묻는 질문</h2><details><summary>아르바이트나 계약직도 받을 수 있나요?</summary><p>고용 형태와 상관없이 계속근로기간이 1년 이상이고 4주 평균 주 15시간 이상 일했다면 지급 대상입니다.</p></details><details><summary>퇴직금에서 세금은 얼마나 떼나요?</summary><p>퇴직소득세는 근속연수공제와 환산급여 방식으로 계산되어 일반 근로소득세와 다르며, 근속기간이 길수록 세 부담이 줄어드는 구조입니다.</p></details><h2>참고 자료</h2><p class="note"><a href="https://www.moel.go.kr" target="_blank" rel="noopener">고용노동부</a> · <a href="https://www.law.go.kr" target="_blank" rel="noopener">국가법령정보센터</a></p></div><footer><a href="about.html">소개</a> · <a href="contact.html">문의</a> · <a href="privacy.html">개인정보처리방침</a> · <a href="terms.html">이용약관</a><br>© 한줄셈</footer></div><script src="calc.js"></script></body></html>

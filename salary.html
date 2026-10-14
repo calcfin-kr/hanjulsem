@@ -1,0 +1,18 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>연봉 실수령액 계산기 - 한줄셈</title><meta name="description" content="연봉에서 4대보험과 소득세를 뺀 월 실수령액을 추정합니다."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@700&family=Noto+Sans+KR:wght@400;600;700&display=swap"><link rel="stylesheet" href="style.css"><link rel="canonical" href="https://hanjulsem.kr/salary.html"></head><body><div class="w"><header><a class="brand" href="index.html">한줄셈</a><span>한 줄로 끝나는 세금·금융 계산</span></header><nav><a href="salary.html">연봉 실수령액</a><a href="loan.html">대출 이자</a><a href="deposit.html">예금·적금 이자</a><a href="severance.html">퇴직금</a><a href="rent.html">전월세 전환</a><a href="acquisition.html">취득세</a><a href="dsr.html">DSR</a><a href="capgain.html">양도소득세</a><a href="incometax.html">종합소득세</a><a href="guide.html">가이드</a></nav><h1>연봉 실수령액 계산기</h1><p class="sub">계산 결과와 함께 계산 원리, 예시, 법적 근거를 확인하세요.</p>
+<div class="card"><h2 style="margin-top:0">연봉 실수령액 계산기</h2>
+<div class="g">
+<div><label>연봉 (원)</label><input id="s_y" type="number" value="40000000"></div>
+<div><label>월 비과세액 (식대 등, 원)</label><input id="s_n" type="number" value="200000"></div>
+<div><label>부양가족 수 (본인 제외)</label><input id="s_f" type="number" value="0" min="0"></div>
+</div>
+<button class="go" onclick="salary()">계산하기</button>
+<div class="res" id="s_r">결과가 여기에 표시됩니다.</div>
+<p class="note">간이 추정치입니다. 실제 급여명세서는 회사의 간이세액표·공제 항목에 따라 다를 수 있습니다.</p></div>
+<div class="card"><h2 style="margin-top:0">계산 원리</h2>
+<p>월급에서 <b>국민연금·건강보험·장기요양보험·고용보험</b>(4대보험)과 <b>근로소득세·지방소득세</b>가 공제됩니다. 이 계산기는 연봉에서 비과세액을 뺀 과세급여를 기준으로 4대보험을 구하고, 근로소득공제와 인적공제, 세율표, 근로소득세액공제를 차례로 적용해 소득세를 추정합니다.</p>
+<h3>자주 묻는 질문</h3>
+<details><summary>비과세액은 무엇인가요?</summary><p>식대(월 20만원 한도) 등 세금과 4대보험 계산에서 제외되는 급여 항목입니다. 회사가 식대를 지급하지 않으면 0으로 입력하세요.</p></details>
+<details><summary>세후 금액이 급여명세서와 다른 이유는?</summary><p>간이세액표 적용 방식, 자녀 세액공제, 상여금 지급 시기에 따라 매월 공제액이 달라지고, 연말정산에서 최종 정산됩니다.</p></details>
+</div><div class="card"><h2>계산 예시</h2><p>연봉 4,000만원, 월 비과세 20만원이면 월 급여는 약 333만원이고 과세 대상은 약 313만원입니다. 여기에 국민연금 4.75%(약 14.9만원), 건강보험 3.545%(약 11.1만원), 장기요양(건강보험료의 13.14%, 약 1.5만원), 고용보험 0.9%(약 2.8만원)가 공제되고 근로소득세와 지방소득세가 추가로 빠집니다. 같은 연봉이라도 비과세 항목과 부양가족 수에 따라 실수령액이 달라지는 이유입니다.</p>
+<h2>법적 근거</h2><p>근로소득공제(소득세법 제47조), 세율(제55조), 근로소득세액공제(제59조)를 순서대로 적용하며 지방소득세는 소득세의 10%입니다. 4대보험은 국민연금법, 국민건강보험법, 노인장기요양보험법, 고용보험법의 요율을 따릅니다. 국민연금은 기준소득월액 상한이 있어 고소득자는 일정 금액 이상 오르지 않습니다.</p>
+<h2>이 계산기의 한계</h2><p>실제 급여는 회사가 적용하는 근로소득 간이세액표, 자녀 세액공제, 상여금과 수당 구성에 따라 달라지고 다음 해 연말정산에서 최종 정산됩니다. 따라서 참고용 추정치로만 활용하세요.</p><p class="note">기준일: 2026년 10월 14일. 요율·한도·세율은 개정될 수 있으니 국가법령정보센터(law.go.kr) 등 공식 자료로 확인하세요. 계산 결과는 참고용이며 법적 효력이 없습니다.</p><h2>계산할 때 자주 하는 실수</h2><p>첫째, 비과세 항목을 빠뜨리는 경우입니다. 식대 등 비과세 수당이 있으면 4대보험과 세금의 기준이 되는 금액이 줄어듭니다. 둘째, 계약서의 연봉에 퇴직금이 포함되어 있는 경우입니다. 이때는 월 급여가 연봉÷12보다 적을 수 있으니 급여명세서의 월 지급액을 기준으로 확인하세요. 셋째, 매달 떼는 소득세는 미리 낸 세금일 뿐이라는 점입니다. 부양가족과 각종 공제에 따라 다음 해 연말정산에서 환급받거나 추가로 냅니다.</p><h2>참고 자료</h2><p class="note"><a href="https://www.hometax.go.kr" target="_blank" rel="noopener">국세청 홈택스</a> · <a href="https://www.nps.or.kr" target="_blank" rel="noopener">국민연금공단</a> · <a href="https://www.nhis.or.kr" target="_blank" rel="noopener">국민건강보험공단</a></p></div><footer><a href="about.html">소개</a> · <a href="contact.html">문의</a> · <a href="privacy.html">개인정보처리방침</a> · <a href="terms.html">이용약관</a><br>© 한줄셈</footer></div><script src="calc.js"></script></body></html>

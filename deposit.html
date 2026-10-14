@@ -1,0 +1,18 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>예금·적금 이자 계산기 - 한줄셈</title><meta name="description" content="단리·월복리와 이자과세를 반영한 세후 이자를 계산합니다."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@700&family=Noto+Sans+KR:wght@400;600;700&display=swap"><link rel="stylesheet" href="style.css"><link rel="canonical" href="https://hanjulsem.kr/deposit.html"></head><body><div class="w"><header><a class="brand" href="index.html">한줄셈</a><span>한 줄로 끝나는 세금·금융 계산</span></header><nav><a href="salary.html">연봉 실수령액</a><a href="loan.html">대출 이자</a><a href="deposit.html">예금·적금 이자</a><a href="severance.html">퇴직금</a><a href="rent.html">전월세 전환</a><a href="acquisition.html">취득세</a><a href="dsr.html">DSR</a><a href="capgain.html">양도소득세</a><a href="incometax.html">종합소득세</a><a href="guide.html">가이드</a></nav><h1>예금·적금 이자 계산기</h1><p class="sub">계산 결과와 함께 계산 원리, 예시, 법적 근거를 확인하세요.</p>
+<div class="card"><h2 style="margin-top:0">예금·적금 이자 계산기</h2>
+<div class="g">
+<div><label>종류</label><select id="d_t"><option value="d">정기예금(목돈)</option><option value="s">적금(매월 납입)</option></select></div>
+<div><label>금액 (예금: 원금 / 적금: 월 납입액, 원)</label><input id="d_a" type="number" value="1000000"></div>
+<div><label>연 이자율 (%)</label><input id="d_r" type="number" value="3.5" step="0.01"></div>
+<div><label>기간 (개월)</label><input id="d_m" type="number" value="12"></div>
+<div><label>이자 방식</label><select id="d_c"><option value="s">단리</option><option value="c">월복리</option></select></div>
+<div><label>과세</label><select id="d_x"><option value="0.154">일반과세 15.4%</option><option value="0.095">세금우대 9.5%</option><option value="0">비과세</option></select></div>
+</div>
+<button class="go" onclick="save()">계산하기</button>
+<div class="res" id="d_res">결과가 여기에 표시됩니다.</div></div>
+<div class="card"><h2 style="margin-top:0">계산 원리</h2>
+<p>예금 단리 이자는 원금×연이율×기간/12입니다. 적금은 매월 납입분마다 남은 개월 수만큼 이자가 붙으므로 단리 기준 총이자는 월납입액×연이율×n(n+1)/2/12로 계산합니다. 이자소득에는 일반적으로 15.4%(소득세 14%+지방세 1.4%)가 원천징수됩니다.</p>
+<details><summary>세전 이자율과 세후 이자율은 어떻게 다른가요?</summary><p>광고되는 금리는 대체로 세전입니다. 일반과세라면 실제 수령 이자는 약 84.6% 수준입니다.</p></details>
+</div><div class="card"><h2>계산 예시</h2><p>1,000만원을 연 3.5% 단리로 12개월 맡기면 세전 이자는 35만원입니다. 일반과세 15.4%(소득세 14%, 지방소득세 1.4%)가 원천징수되어 세금은 53,900원, 세후 이자는 296,100원입니다. 적금은 매월 납입한 돈이 예치된 기간이 다르므로, 같은 금리라도 예금보다 실제 이자가 적습니다. 흔히 "연 3.5% 적금"의 체감 수익률이 약 절반인 이유입니다.</p>
+<h2>법적 근거</h2><p>이자소득의 원천징수세율은 소득세법 제129조에 따라 14%이며 지방소득세 1.4%가 더해집니다. 이자와 배당 등 금융소득이 연 2,000만원을 넘으면 금융소득종합과세 대상이 되어 다른 소득과 합산 과세됩니다. 비과세종합저축 등 요건을 갖춘 상품은 비과세를 선택할 수 있습니다.</p>
+<h2>유의사항</h2><p>실제 상품은 우대금리, 이자 지급 주기, 중도해지 이율이 다릅니다. 이 계산기의 월복리는 단순화한 모델이므로 최종 금액은 상품 설명서로 확인하세요.</p><p class="note">기준일: 2026년 10월 14일. 요율·한도·세율은 개정될 수 있으니 국가법령정보센터(law.go.kr) 등 공식 자료로 확인하세요. 계산 결과는 참고용이며 법적 효력이 없습니다.</p><h2>상품 고를 때 확인할 것</h2><p>광고 금리가 높아도 우대금리 조건(급여이체, 카드 실적 등)을 채워야 받을 수 있는 경우가 많으므로 기본금리와 우대금리를 나눠서 비교하세요. 적금은 납입 원금 전체에 이자가 붙는 것이 아니라 납입 기간만큼만 붙기 때문에 표시 금리의 약 절반 수준으로 체감됩니다. 중도해지하면 약정 금리보다 훨씬 낮은 중도해지 이율이 적용됩니다.</p><p>예금자보호 한도는 금융회사별 1인당 원금과 이자 합계 기준이며 한도가 바뀐 적이 있으니 예금보험공사 안내에서 최신 금액을 확인하세요.</p><h2>참고 자료</h2><p class="note"><a href="https://www.kdic.or.kr" target="_blank" rel="noopener">예금보험공사</a> · <a href="https://www.law.go.kr" target="_blank" rel="noopener">국가법령정보센터</a> · <a href="https://www.hometax.go.kr" target="_blank" rel="noopener">국세청 홈택스</a></p></div><footer><a href="about.html">소개</a> · <a href="contact.html">문의</a> · <a href="privacy.html">개인정보처리방침</a> · <a href="terms.html">이용약관</a><br>© 한줄셈</footer></div><script src="calc.js"></script></body></html>
