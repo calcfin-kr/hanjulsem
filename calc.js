@@ -6,7 +6,7 @@ function R(i,h){document.getElementById(i).innerHTML=h}
 function tbl(rows){return '<div class="wrap"><table>'+rows.map(function(r){return "<tr><td>"+r[0]+"</td><td>"+r[1]+"</td></tr>"}).join("")+"</table></div>"}
 
 /* 요율 상수: 매년 갱신 필요 (기준일 확인) */
-var NP=0.0475,NP_MAX=6370000,HI=0.03545,LTC=0.1314,EI=0.009;
+var NP=0.0475,NP_MAX=6590000,HI=0.03595,LTC=0.1314,EI=0.009;
 function salary(){
  var y=$("s_y"),nt=$("s_n")*12,fam=$("s_f");
  var m=Math.max(y-nt,0)/12;
@@ -14,11 +14,14 @@ function salary(){
  var ins=(np+hi+lt+ei)*12,tax=Math.max(y-nt,0);
  var d=tax<=5e6?tax*.7:tax<=15e6?3.5e6+(tax-5e6)*.4:tax<=45e6?7.5e6+(tax-15e6)*.15:tax<=100e6?12e6+(tax-45e6)*.05:14.75e6+(tax-100e6)*.02;
  d=Math.min(d,2e7);
- var base=Math.max(tax-d-1.5e6*(1+fam)-(np+hi+lt)*12-ei*12,0);
- var B=[[14e6,.06,0],[50e6,.15,1.26e6],[88e6,.24,5.76e6],[150e6,.35,15.44e6],[300e6,.38,19.94e6],[500e6,.4,25.94e6],[1e9,.42,35.94e6],[1e18,.45,65.94e6]],it=0;
- for(var i=0;i<B.length;i++){if(base<=B[i][0]){it=base*B[i][1]-B[i][2];break}}
- var cr=it<=1.3e6?it*.55:715000+(it-1.3e6)*.3,cap=tax<=33e6?740000:tax<=70e6?Math.max(660000-(tax-33e6)*.008,500000):Math.max(500000-(tax-70e6)*.5/100,200000);
- it=Math.max(it-Math.min(cr,cap),0);
+ var B=[[14e6,.06,0],[50e6,.15,1.26e6],[88e6,.24,5.76e6],[150e6,.35,15.44e6],[300e6,.38,19.94e6],[500e6,.4,25.94e6],[1e9,.42,35.94e6],[1e18,.45,65.94e6]];
+ /* 근로소득세액공제 한도 (소득세법 제59조) */
+ var cap=tax<=33e6?740000:tax<=70e6?Math.max(740000-(tax-33e6)*.008,660000):tax<=120e6?Math.max(660000-(tax-70e6)*.5,500000):Math.max(500000-(tax-120e6)*.5,200000);
+ function calcTax(ded,std){var base=Math.max(tax-d-1.5e6*(1+fam)-np*12-ded,0),t=0;
+  for(var i=0;i<B.length;i++){if(base<=B[i][0]){t=base*B[i][1]-B[i][2];break}}
+  var cr=t<=1.3e6?t*.55:715000+(t-1.3e6)*.3;return Math.max(t-Math.min(cr,cap)-std,0)}
+ /* 건강·고용보험료 소득공제와 표준세액공제(13만원)는 중복 불가: 세금이 적은 쪽 적용 */
+ var it=Math.min(calcTax((hi+lt+ei)*12,0),calcTax(0,130000));
  var mi=Math.floor(it/12/10)*10,ml=Math.floor(mi*.1/10)*10,ded=np+hi+lt+ei+mi+ml,mm=y/12;
  R("s_r",'월 실수령액 <div class="big">'+W(mm-ded)+'</div>'+tbl([["월 급여(세전)",W(mm)],["국민연금",W(np)],["건강보험",W(hi)],["장기요양",W(lt)],["고용보험",W(ei)],["근로소득세",W(mi)],["지방소득세",W(ml)],["공제 합계",W(ded)]]))}
 
@@ -52,11 +55,11 @@ function rent(){
 function btax(b){var B=[[14e6,.06,0],[50e6,.15,1.26e6],[88e6,.24,5.76e6],[150e6,.35,15.44e6],[300e6,.38,19.94e6],[500e6,.4,25.94e6],[1e9,.42,35.94e6],[1e18,.45,65.94e6]];for(var i=0;i<B.length;i++)if(b<=B[i][0])return Math.max(b*B[i][1]-B[i][2],0);return 0}
 function cg(){var sp=$("c_s"),g=sp-$("c_b")-$("c_e"),h=$("c_h"),l=$("c_l"),o=document.getElementById("c_o").value;
  if(g<=0)return R("c_res","양도차익이 없어 양도소득세가 없습니다.");
- var tg=g,ltd;
+ var tg=g,ltd,hy=Math.floor(h),ly=Math.min(Math.floor(l),hy),gen=hy>=3?Math.min(hy*2,30):0;
  if(o=="1"){if(h<2)return R("c_res","보유 2년 미만이면 비과세 요건 미충족입니다. 일반 과세를 선택하세요.");
   if(sp<=12e8)return R("c_res",'<div class="big">비과세</div><p>양도가 12억원 이하 1세대 1주택 비과세로 가정했습니다.</p>');
-  tg=g*(sp-12e8)/sp;ltd=(h>=3?Math.min(h,10)*4:0)+(l>=2?Math.min(l,10)*4:0)}
- else ltd=h>=3?(h>=15?30:6+(h-3)*2):0;
+  tg=g*(sp-12e8)/sp;ltd=hy>=3&&ly>=2?Math.min(hy,10)*4+Math.min(ly,10)*4:gen}
+ else ltd=gen;
  var base=Math.max(tg*(1-ltd/100)-2.5e6,0),t=h<1?base*.7:h<2?base*.6:btax(base),lc=t*.1;
  R("c_res",'납부세액 합계 <div class="big">'+W(t+lc)+'</div>'+tbl([["양도차익",W(g)],["과세 대상 양도차익",W(tg)],["장기보유특별공제율",ltd+"%"],["과세표준(기본공제 250만원 후)",W(base)],["양도소득세",W(t)],["지방소득세",W(lc)]]))}
 function itx(){var n=Math.max($("i_n"),1),inc=Math.max($("i_r")-$("i_e"),0),base=Math.max(inc-1.5e6*n-$("i_d"),0),t=Math.max(btax(base)-$("i_c"),0),lc=Math.floor(t*.1/10)*10,tot=t+lc,df=tot-$("i_p");

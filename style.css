@@ -51,3 +51,5 @@ footer{margin:32px 0 8px;padding-top:12px;border-top:2px solid var(--tx);font-si
 @media (max-width:760px){.keys{grid-template-columns:repeat(2,1fr)}.keys .key:last-child:nth-child(odd){grid-column:span 2;min-height:100px}}
 @media (max-width:380px){.keys{grid-template-columns:1fr}.keys .key:last-child:nth-child(odd){grid-column:auto}}
 @media (prefers-reduced-motion:reduce){.key{transition:none}}
+.tbl{margin:10px 0}.tbl th,.tbl td{white-space:nowrap;padding:6px 8px}
+.box{border-left:4px solid var(--pr);background:var(--bg);padding:12px 16px;margin:16px 0}
